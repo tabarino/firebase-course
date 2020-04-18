@@ -33,16 +33,16 @@ export class AboutComponent implements OnInit {
 
         // This Observable returns from the database only the data changed
         // stateChanges give you back only the records changed in the collection
-        this.db.collection('courses').stateChanges().subscribe(snaps => {
-            const courses: Course[] = snaps.map(snap => {
-                return <Course> {
-                    id: snap.payload.doc.id,
-                    ...snap.payload.doc.data()
-                };
-            });
+        // this.db.collection('courses').stateChanges().subscribe(snaps => {
+        //     const courses: Course[] = snaps.map(snap => {
+        //         return <Course> {
+        //             id: snap.payload.doc.id,
+        //             ...snap.payload.doc.data()
+        //         };
+        //     });
 
-            console.log(courses);
-        });
+        //     console.log(courses);
+        // });
     }
 
 }

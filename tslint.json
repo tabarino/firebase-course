@@ -124,7 +124,8 @@
       true,
       "element",
       "app",
-      "kebab-case"
+      "kebab-case",
+      "disable-next-line"
     ],
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
