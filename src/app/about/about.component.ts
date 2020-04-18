@@ -1,16 +1,19 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+    selector: 'about',
+    templateUrl: './about.component.html',
+    styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+    constructor(private db: AngularFirestore) { }
 
-  ngOnInit() {
-
-  }
+    ngOnInit() {
+        this.db.collection('courses').valueChanges().subscribe(val => {
+            console.log(val);
+        });
+    }
 
 }
