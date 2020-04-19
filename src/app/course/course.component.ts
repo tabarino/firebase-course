@@ -5,38 +5,25 @@ import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Lesson} from '../model/lesson';
 
-
 @Component({
-  selector: 'course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+    selector: 'course',
+    templateUrl: './course.component.html',
+    styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
+    course: Course;
+    dataSource: any;
+    displayedColumns = ['seqNo', 'description', 'duration'];
 
-  course: Course;
+    constructor(
+        private route: ActivatedRoute
+    ) { }
 
-  displayedColumns = ['seqNo', 'description', 'duration'];
+    ngOnInit() {
+        this.course = this.route.snapshot.data['course'];
+    }
 
-  dataSource:any;
+    loadMore() {
 
-
-  constructor(
-    private route: ActivatedRoute) {
-
-
-  }
-
-  ngOnInit() {
-
-    this.course = this.route.snapshot.data['course'];
-
-
-
-  }
-
-  loadMore() {
-
-  }
-
-
+    }
 }
