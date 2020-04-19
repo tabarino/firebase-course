@@ -29,7 +29,6 @@ export class CourseDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-
     }
 
     save() {

@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
 import { Course } from '../model/course';
 import { convertSnaps } from './db-util';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Lesson } from '../model/lesson';
 import OrderByDirection = firebase.firestore.OrderByDirection;
 
@@ -73,6 +73,6 @@ export class CoursesService {
     }
 
     saveCourse(courseId: string, changes: Partial<Course>): Observable<any> {
-
+        return from (this.db.doc(`courses/${courseId}`).update(changes));
     }
 }
