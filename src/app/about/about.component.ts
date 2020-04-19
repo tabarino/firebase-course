@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Course } from '../model/course';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'about',
@@ -8,9 +6,7 @@ import { Course } from '../model/course';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-    constructor(
-        private db: AngularFirestore
-    ) { }
+    constructor() { }
 
     ngOnInit() {
         // This Observable returns all data from database everytime a data changes
@@ -37,12 +33,11 @@ export class AboutComponent implements OnInit {
         //     const courses: Course[] = snaps.map(snap => {
         //         return <Course> {
         //             id: snap.payload.doc.id,
-        //             ...snap.payload.doc.data()
+        //             ...snap.payload.doc.data() as Course
         //         };
         //     });
 
         //     console.log(courses);
         // });
     }
-
 }
