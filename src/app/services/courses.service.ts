@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
 import { Course } from '../model/course';
+import { convertSnaps } from './db-util';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +37,18 @@ export class CoursesService {
             // For both cases Firestore add an error in the console with the link to create the index
             // 'courses', ref => ref.where('seqNo', '>=', 5).where('lessonsCount', '==', 8)
         ).snapshotChanges().pipe(
+            map(snaps => convertSnaps<Course>(snaps)),
+            first()
+        );
+    }
+
+    findCourseByUrl(courseUrl: string): Observable<Course> {
+        return this.db.collection(
+            'courses', ref => ref.where('url', '==', courseUrl)
+        ).snapshotChanges().pipe(
             map(snaps => {
-                return snaps.map(snap => {
-                    return <Course> {
-                        id: snap.payload.doc.id,
-                        ...snap.payload.doc.data() as Course
-                    };
-                });
+                const courses = convertSnaps<Course>(snaps);
+                return courses.length === 1 ? courses[0] : undefined;
             }),
             first()
         );
