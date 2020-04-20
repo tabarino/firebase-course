@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
     selector: 'about',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-    constructor() { }
+    constructor(private db: AngularFirestore) { }
 
     ngOnInit() {
         // This Observable returns all data from database everytime a data changes
@@ -55,6 +56,20 @@ export class AboutComponent implements OnInit {
         // Run Transaction
         // Use it if you are going to read and write data in one or more than one doc in the database
         // this.runTransaction();
+
+        // Document References
+        // const courseRef = this.db.doc('/courses/IkO009NXSs0USMiH8L6e').snapshotChanges().subscribe(
+        //     snap => {
+        //         const course: any = snap.payload.data();
+        //         console.log(course.relatedCourseRef);
+        //     }
+        // );
+
+        // const ref = this.db.doc('courses/LM85e3KgxuZ8n8XZMbWr').snapshotChanges().subscribe(
+        //     snap => {
+        //         console.log(snap.payload.ref);
+        //     }
+        // );
     }
 
     // async runTransaction() {
