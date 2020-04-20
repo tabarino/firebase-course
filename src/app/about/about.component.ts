@@ -39,5 +39,16 @@ export class AboutComponent implements OnInit {
 
         //     console.log(courses);
         // });
+
+        // Firestore Batched Writes
+        // There is a limit of writes using the batch - 500 operations at the same time
+        // If you have more than that you have to split the batches
+        // const firebaseCourseRef = this.db.doc('/courses/IkO009NXSs0USMiH8L6e').ref;
+        // const ngrxCourseRef = this.db.doc('/courses/LM85e3KgxuZ8n8XZMbWr').ref;
+
+        // const batch = this.db.firestore.batch();
+        // batch.update(firebaseCourseRef, { titles: { description: 'Serverless 123 Angular with Firebase Course' } });
+        // batch.update(ngrxCourseRef, { titles: { description: 'NgRx 123 In Depth' } });
+        // const batch$ = of(batch.commit());
     }
 }
