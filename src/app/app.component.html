@@ -41,6 +41,10 @@
 
             <div class="filler"></div>
 
+            <ng-container *ngIf="(pictureUrl$ | async) as pictureUrl">
+                <img class="user-avatar" [src]="pictureUrl" alt="User Avatar">
+            </ng-container>
+
         </div>
 
 

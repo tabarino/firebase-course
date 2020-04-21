@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
     isLoggedIn$: Observable<boolean>;
     isLoggedOut$: Observable<boolean>;
+    pictureUrl$: Observable<string>;
 
     constructor(
         private angularFireAuth: AngularFireAuth
@@ -20,6 +21,9 @@ export class AppComponent implements OnInit {
         // The command !!user will transform the user variable in a boolean
         this.isLoggedIn$ = this.angularFireAuth.authState.pipe(map(user => !!user));
         this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
+        this.pictureUrl$ = this.angularFireAuth.authState.pipe(
+            map(user => user ? user.photoURL : null)
+        );
     }
 
     logout() {
