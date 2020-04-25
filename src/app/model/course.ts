@@ -5,6 +5,7 @@ export interface Course {
         longDescription: string;
     };
     iconUrl: string;
+    url: string;
     uploadedImageUrl: string;
     courseListIcon: string;
     categories: string[];
