@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Course } from '../model/course';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
     selector: 'course-dialog',
@@ -18,7 +19,8 @@ export class CourseDialogComponent implements OnInit {
         private fb: FormBuilder,
         private dialogRef: MatDialogRef<CourseDialogComponent>,
         @Inject(MAT_DIALOG_DATA) course: Course,
-        private coursesService: CoursesService
+        private coursesService: CoursesService,
+        private storage: AngularFireStorage
     ) {
         const titles = course.titles;
         this.course = course;
@@ -43,5 +45,13 @@ export class CourseDialogComponent implements OnInit {
 
     close() {
         this.dialogRef.close();
+    }
+
+    uploadFile(event) {
+        const file = event.target.files[0];
+        const filePath = `courses/${this.course.id}/${file.name}`;
+        const task = this.storage.upload(filePath, file);
+
+        task.snapshotChanges().subscribe(console.log);
     }
 }
