@@ -20,11 +20,12 @@ export const resizeThumbnail = functions.storage.object().onFinalize(
 
         console.log('Thumbnail generation started: ', fileFullPath, fileDir, fileName);
 
-        if (contentType.startsWith('image/') || fileName.startsWith('thumb_')) {
+        if (!contentType.startsWith('image/') || fileName.startsWith('thumb_')) {
             console.log('Exiting image processing.');
             return null;
         }
 
+        // Download the original file uploaded by the user
         await mkdirp(tempLocalDir);
 
         const bucket = gcs.bucket(object.bucket);
@@ -62,7 +63,7 @@ export const resizeThumbnail = functions.storage.object().onFinalize(
 
         // Create link to uploaded file
         const thumbnail = uploadedFiles[0];
-        const url = thumbnail.getSignedUrl({ action: 'read', expires: new Date(2099, 12, 31) });
+        const url = await thumbnail.getSignedUrl({ action: 'read', expires: new Date(2099, 12, 31) });
 
         console.log('Generate signed url: ', url);
 
