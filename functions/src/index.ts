@@ -1,17 +1,17 @@
 import * as functions from 'firebase-functions';
 import * as express from 'express';
+import { Course } from '../../src/app/model/course'
 import { db } from './init';
 
-const cors = require('cors');
-
 const app = express();
+const cors = require('cors');
 
 app.use(cors({ origin: true }));
 
 app.get('/courses', async (request, response) => {
     const snaps = await db.collection('courses').get();
-    const courses: any[] = [];
-    snaps.forEach((snap: { data: () => any; }) => courses.push(snap.data()));
+    const courses: Course[] = [];
+    snaps.forEach(snap => courses.push(snap.data()));
 
     response.status(200).json({ courses });
 });
