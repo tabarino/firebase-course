@@ -62,6 +62,10 @@ export class CourseDialogComponent implements OnInit {
             concatMap(() => this.storage.ref(filePath).getDownloadURL())
         );
 
-        this.downloadUrl$.subscribe(console.log);
+        const saveUrl$ = this.downloadUrl$.pipe(concatMap(
+            url => this.coursesService.saveCourse(this.course.id, { uploadedImageUrl: url })
+        ));
+
+        saveUrl$.subscribe(console.log);
     }
 }
